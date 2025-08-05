@@ -1,0 +1,37 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer, PorterStemmer
+import string
+
+
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords', quiet=True)
+nltk.download('wordnet', quiet=True)
+
+text = "i am aarya avinash chavan,currently pursuying btech from sanjivani college of enginnering.."
+
+
+tokens = word_tokenize(text)
+
+
+tokens_no_punct = [t for t in tokens if t not in string.punctuation]
+
+stop_words = set(stopwords.words('english'))
+tokens_no_stop = [t for t in tokens_no_punct if t.lower() not in stop_words]
+
+
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(t) for t in tokens_no_stop]
+
+
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(t) for t in tokens_no_stop]
+
+
+print("Original text:\n", text)
+print("\nTokenized:\n", tokens)
+print("\nWithout punctuation:\n", tokens_no_punct)
+print("\nWithout stopwords:\n", tokens_no_stop)
+print("\nLemmatized:\n", lemmatized)
+print("\nStemmed:\n", stemmed)
