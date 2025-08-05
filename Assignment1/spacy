@@ -1,0 +1,22 @@
+import spacy
+import string
+
+nlp = spacy.load('en_core_web_sm')
+
+text = "i am aarya avinash chavan,currently pursuying btech from sanjivani college of enginnering in information technology."
+
+doc = nlp(text)
+
+tokens = [token.text for token in doc]
+
+tokens_no_punct = [token.text for token in doc if token.text not in string.punctuation]
+
+tokens_no_stop = [token.text for token in doc if not token.is_stop and token.text not in string.punctuation]
+
+lemmatized = [token.lemma_ for token in doc if not token.is_stop and token.text not in string.punctuation]
+
+print("Original text:\n", text)
+print("\nTokenized:\n", tokens)
+print("\nWithout punctuation:\n", tokens_no_punct)
+print("\nWithout stopwords:\n", tokens_no_stop)
+print("\nLemmatized:\n", lemmatized)
